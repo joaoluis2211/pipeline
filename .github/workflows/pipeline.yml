@@ -23,7 +23,7 @@ jobs:
         run: npm install -g jest
 
       - name: Testar soma
-        run: npm test -- --runInBand -t "soma"
+        run: jest calculadora.test.js -t "soma"
 
 
   teste-subtracao:
@@ -42,7 +42,7 @@ jobs:
         run: npm install -g jest
 
       - name: Testar subtração
-        run: npm test -- --runInBand -t "subtracao"
+        run: jest calculadora.test.js -t "subtracao"
 
 
   teste-multiplicacao:
@@ -61,7 +61,7 @@ jobs:
         run: npm install -g jest
 
       - name: Testar multiplicação
-        run: npm test -- --runInBand -t "multiplicacao"
+        run: jest calculadora.test.js-t "multiplicacao"
 
 
   teste-divisao:
@@ -80,7 +80,7 @@ jobs:
         run: npm install -g jest
 
       - name: Testar divisão
-        run: npm test -- --runInBand -t "divisao"
+        run: jest calculadora.test.js -t "divisao"
 
 
   deploy:
