@@ -1,0 +1,97 @@
+name: Pipeline Calculadora
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  teste-soma:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Testar soma
+        run: npm test -- --runInBand -t "soma"
+
+
+  teste-subtracao:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Testar subtração
+        run: npm test -- --runInBand -t "subtracao"
+
+
+  teste-multiplicacao:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Testar multiplicação
+        run: npm test -- --runInBand -t "multiplicacao"
+
+
+  teste-divisao:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Testar divisão
+        run: npm test -- --runInBand -t "divisao"
+
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    needs:
+      - teste-soma
+      - teste-subtracao
+      - teste-multiplicacao
+      - teste-divisao
+
+    steps:
+      - name: Deploy
+        run: echo "Todos os testes passaram. Realizando deploy..."
