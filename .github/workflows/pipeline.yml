@@ -20,7 +20,7 @@ jobs:
           node-version: '20'
 
       - name: Instalar dependências
-        run: npm install
+        run: npm install -g jest
 
       - name: Testar soma
         run: npm test -- --runInBand -t "soma"
@@ -39,7 +39,7 @@ jobs:
           node-version: '20'
 
       - name: Instalar dependências
-        run: npm install
+        run: npm install -g jest
 
       - name: Testar subtração
         run: npm test -- --runInBand -t "subtracao"
@@ -58,7 +58,7 @@ jobs:
           node-version: '20'
 
       - name: Instalar dependências
-        run: npm install
+        run: npm install -g jest
 
       - name: Testar multiplicação
         run: npm test -- --runInBand -t "multiplicacao"
@@ -77,7 +77,7 @@ jobs:
           node-version: '20'
 
       - name: Instalar dependências
-        run: npm install
+        run: npm install -g jest
 
       - name: Testar divisão
         run: npm test -- --runInBand -t "divisao"
