@@ -12,8 +12,15 @@ function multiplicacao(a, b) {
 
 function divisao(a, b) {
     if (b === 0) {
-        return "Erro: não é possível dividir por zero.";
+        throw new Error("Divisão por zero não é permitida.");
     }
 
     return a / b;
 }
+
+module.exports = {
+    soma,
+    subtracao,
+    multiplicacao,
+    divisao
+};

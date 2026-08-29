@@ -1,4 +1,9 @@
-const { soma, subtracao, multiplicacao, divisao } = require("./calculadora");
+const {
+    soma,
+    subtracao,
+    multiplicacao,
+    divisao
+} = require("./calculadora");
 
 test("soma", () => {
     expect(soma(5, 5)).toBe(10);
