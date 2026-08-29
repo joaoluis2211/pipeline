@@ -19,11 +19,11 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Instalar dependências
+      - name: Instalar Jest
         run: npm install -g jest
 
       - name: Testar soma
-        run: jest calculadora.test.js -t "soma"
+        run: jest calculadora.test.js -t "soma" --config='{}'
 
 
   teste-subtracao:
@@ -38,11 +38,11 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Instalar dependências
+      - name: Instalar Jest
         run: npm install -g jest
 
       - name: Testar subtração
-        run: jest calculadora.test.js -t "subtracao"
+        run: jest calculadora.test.js -t "subtracao" --config='{}'
 
 
   teste-multiplicacao:
@@ -57,11 +57,11 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Instalar dependências
+      - name: Instalar Jest
         run: npm install -g jest
 
       - name: Testar multiplicação
-        run: jest calculadora.test.js-t "multiplicacao"
+        run: jest calculadora.test.js -t "multiplicacao" --config='{}'
 
 
   teste-divisao:
@@ -76,11 +76,11 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Instalar dependências
+      - name: Instalar Jest
         run: npm install -g jest
 
       - name: Testar divisão
-        run: jest calculadora.test.js -t "divisao"
+        run: jest calculadora.test.js -t "divisao" --config='{}'
 
 
   deploy:
@@ -94,4 +94,4 @@ jobs:
 
     steps:
       - name: Deploy
-        run: echo "Todos os testes passaram. Realizando deploy..."
+        run: echo "Todos os testes passaram. Fazendo deploy..."
