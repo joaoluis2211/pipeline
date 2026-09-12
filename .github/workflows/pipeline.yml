@@ -15,6 +15,15 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Instalar Dependencias
+        run: npm install
+
+      - name: Analise Estatica (Linter)
+        run: npm run lint
+
+      - name: Testes Unitarios e Cobertura Minima
+        run: npm test
+
       - name: Análise de Segurança (Gitleaks)
         uses: gitleaks/gitleaks-action@v2
         env:
