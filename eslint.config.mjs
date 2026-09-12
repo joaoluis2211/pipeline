@@ -8,14 +8,14 @@ export default [
   {
     languageOptions: {
       ecmaVersion: "latest",
-      sourceType: "commonjs", // Permite o uso de require() e module.exports
+      sourceType: "commonjs", // Permite o uso de require() e module.exports na sua calculadora
       globals: {
         ...globals.node,  // Ativa globais do Node (require, module, process)
         ...globals.jest,  // Ativa globais do Jest (test, expect, describe)
       },
     },
     rules: {
-      "no-console": "off", // Desativa o aviso do console.log para os seus testes exibirem as mensagens
+      "no-console": "off", // Permite o uso de console.log nos testes
     },
   },
 ];

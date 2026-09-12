@@ -6,7 +6,7 @@
   "scripts": {
   "teste": "jest",
   "test": "jest",
-  "lint": "eslint . --config eslint.config.js"
+  "lint": "eslint ."
 },
   "devDependencies": {
     "eslint": "^9.10.0",
