@@ -4,9 +4,12 @@
   "description": "Calculadora em JavaScript",
   "main": "calculadora.js",
   "scripts": {
-    "teste": "jest"
+    "teste": "jest",
+    "test": "jest",
+    "lint": "eslint ."
   },
   "devDependencies": {
+    "eslint": "^9.10.0",
     "jest": "^29.7.0"
   }
 }
