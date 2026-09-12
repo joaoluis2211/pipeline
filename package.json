@@ -4,10 +4,10 @@
   "description": "Calculadora em JavaScript",
   "main": "calculadora.js",
   "scripts": {
-    "teste": "jest",
-    "test": "jest",
-    "lint": "eslint ."
-  },
+  "teste": "jest",
+  "test": "jest",
+  "lint": "eslint . --config eslint.config.js"
+},
   "devDependencies": {
     "eslint": "^9.10.0",
     "jest": "^29.7.0"
