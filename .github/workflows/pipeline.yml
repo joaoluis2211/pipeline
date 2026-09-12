@@ -31,14 +31,23 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Instalar Dependências
         run: npm install
 
-      - name: Simular Build do Projeto
-        run: echo "Nenhum script de build necessário para JS puro. Build concluído."
+      # Compacta o código do projeto e a pasta node_modules num arquivo chamado projeto.zip
+      - name: Gerar Arquivo ZIP do Projeto
+        run: zip -r projeto.zip . -x ".git/*" ".github/*"
+
+      # Guarda o arquivo ZIP nos servidores do GitHub para os próximos jobs usarem
+      - name: Guardar Artefato ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: codigo-compactado
+          path: projeto.zip
+          retention-days: 1 # Opcional: apaga o arquivo após 1 dia para poupar espaço
 
 
   testes-matriz:
@@ -46,24 +55,27 @@ jobs:
     needs: [build]
     strategy:
       matrix:
-        # Testa toda a sua suíte de testes nas 3 versões do Node.js em paralelo
-        node-version: ['20', '21', '22']
+        node-version: ['22', '23', '24']
 
     steps:
-      - name: Checkout do código
-        uses: actions/checkout@v4
+      # Descarrega o arquivo ZIP que foi gerado no job de build
+      - name: Baixar Artefato ZIP do Build
+        uses: actions/download-artifact@v4
+        with:
+          name: codigo-compactado
 
-      - name: Configurar Node.js
+      # Descompacta o arquivo ZIP na raiz da nova máquina virtual antes de testar
+      - name: Descompactar Arquivo do Projeto
+        run: |
+          unzip projeto.zip
+          rm projeto.zip
+
+      - name: Configurar Node.js da Matriz
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
 
-      # Instala o Jest listado no package.json localmente na máquina virtual
-      - name: Instalar Dependências do Projeto
-        run: npm install
-
-      # Executa o comando "jest" mapeado em "npm run teste"
+      # Como o node_modules veio dentro do ZIP, executamos diretamente o Jest
       - name: Executar Testes com Jest
         run: npm run teste
 
@@ -73,4 +85,4 @@ jobs:
     needs: [testes-matriz]
     steps:
       - name: Deploy
-        run: echo "Todos os testes passaram no Jest. Fazendo deploy..."
+        run: echo "Todos os testes passaram no arquivo descompactado. Fazendo deploy..."
