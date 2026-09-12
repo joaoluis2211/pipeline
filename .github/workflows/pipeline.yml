@@ -37,17 +37,17 @@ jobs:
       - name: Instalar Dependências
         run: npm install
 
-      # Compacta o código do projeto e a pasta node_modules num arquivo chamado projeto.zip
+      
       - name: Gerar Arquivo ZIP do Projeto
         run: zip -r projeto.zip . -x ".git/*" ".github/*"
 
-      # Guarda o arquivo ZIP nos servidores do GitHub para os próximos jobs usarem
+      
       - name: Guardar Artefato ZIP
         uses: actions/upload-artifact@v4
         with:
           name: codigo-compactado
           path: projeto.zip
-          retention-days: 1 # Opcional: apaga o arquivo após 1 dia para poupar espaço
+          retention-days: 1 
 
 
   testes-matriz:
@@ -58,13 +58,13 @@ jobs:
         node-version: ['22', '23', '24']
 
     steps:
-      # Descarrega o arquivo ZIP que foi gerado no job de build
+      
       - name: Baixar Artefato ZIP do Build
         uses: actions/download-artifact@v4
         with:
           name: codigo-compactado
 
-      # Descompacta o arquivo ZIP na raiz da nova máquina virtual antes de testar
+      
       - name: Descompactar Arquivo do Projeto
         run: |
           unzip projeto.zip
@@ -75,7 +75,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # Como o node_modules veio dentro do ZIP, executamos diretamente o Jest
+      
       - name: Executar Testes com Jest
         run: npm run teste
 
